@@ -56,7 +56,6 @@ app.use(function (req, res, next) {
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     app.listen(PORT, function() {
-      console.log('SERVER IS LIVE');
       console.info(`Server listening on ${this.address().port}`);
     }).on('error', err => {
       console.error(err);
