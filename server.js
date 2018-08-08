@@ -60,7 +60,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     app.listen(PORT, function() {
       console.info(`Server listening on ${this.address().port}`);
-      console.log(`process.env: ${JSON.stringify(process.env, null, 2)}`);
+      // console.log(`process.env: ${JSON.stringify(process.env, null, 2)}`);
     }).on('error', err => {
       console.error(err);
     });
