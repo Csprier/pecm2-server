@@ -9,7 +9,7 @@ const passport = require('passport');
 
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
-const { PORT, MONGODB_URI } = require('./config');
+const { PORT, MONGODB_URI, CLIENT_ORIGIN } = require('./config');
 const cors = require('cors');
 
 // Routers
@@ -27,8 +27,11 @@ app.use(morgan(process.env.NODE_ENV === 'developement' ? 'dev' : 'common', {
 }));
 
 // CORS
-app.use(cors());
-app.options('*', cors());
+// app.use(cors());
+// app.options('*', cors());
+app.use(cors({
+  origin: CLIENT_ORIGIN
+}));
 
 // Create a statis webserver
 app.use(express.static('public'));
@@ -57,6 +60,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     app.listen(PORT, function() {
       console.info(`Server listening on ${this.address().port}`);
+      console.log(`process.env: ${JSON.stringify(process.env, null, 2)}`);
     }).on('error', err => {
       console.error(err);
     });
