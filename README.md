@@ -3,30 +3,30 @@ This is a tool teachers can use on their mobile devices to help organize daily c
 
 Create an account! Login to that account! It is protected with JWT authetnication, aswell as bcrypt hashing and salting, and passport!
 
-This app uses:
+### This app uses:
+- Express
+- Node
+- MongoDB
+- Mongoose
+- mLab
 
-Express
-Node
-MongoDB
-Mongoose
-mLab
-Authentication:
+### Authentication:
+- passport
+- passport-jwt
+- passport-local
+- morgan
+- jsonwebtoken(JWT)
+- bcryptjs
+- cors
+- dotenv
 
-passport
-passport-jwt
-passport-local
-morgan
-jsonwebtoken(JWT)
-bcryptjs
-cors
-dotenv
-Testing:
+### Testing:
+- mocha
+- chai
+- chai-http
+- cross-env
+- nyc
 
-mocha
-chai
-chai-http
-cross-env
-nyc
 From the backend, you have CRUD control over:
 
 Users
