@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 
-
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
 const { PORT, MONGODB_URI, CLIENT_ORIGIN } = require('./config');
@@ -26,13 +25,6 @@ app.use(morgan(process.env.NODE_ENV === 'developement' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
 }));
 
-// CORS
-// app.use(cors());
-// app.options('*', cors());
-app.use(cors({
-  origin: CLIENT_ORIGIN
-}));
-
 // Create a statis webserver
 app.use(express.static('public'));
 
@@ -41,6 +33,13 @@ app.use(express.json());
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
+
+// CORS
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
 
 app.use('/api', authRouter);
 app.use('/api/users', usersRouter);
@@ -51,7 +50,7 @@ app.use('/api/periods', periodRouter);
 app.use(function (req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
-  console.error(err);
+  // console.error(err);
   next(err);
 });
 
@@ -60,9 +59,8 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     app.listen(PORT, function() {
       console.info(`Server listening on ${this.address().port}`);
-      // console.log(`process.env: ${JSON.stringify(process.env, null, 2)}`);
     }).on('error', err => {
-      console.error(err);
+      console.error('ERROR: ', err);
     });
   });
 

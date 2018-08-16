@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
       res.json(students.map(student => student.toObject()));
     })
     .catch(err => {
-      console.error(err);
+      // console.error(err);
       next(err);
     });
 });
@@ -22,6 +22,16 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const { firstname, lastname, period } = req.body;
   const newStudent = { firstname, lastname, period };
+
+  const requiredFields = ['firstname', 'lastname'];
+  const missingField = requiredFields.find(field => !(field in req.body));
+
+  if (missingField) {
+    const err = new Error(`Missing ${missingField} in request body`);
+    err.status = 422;
+    // console.error(err);
+    return next(err);
+  }
 
   Student.create(newStudent)
     .then(student => {
@@ -34,7 +44,7 @@ router.post('/', (req, res, next) => {
         err = new Error('This student already exists');
         err.status = 400;
       }
-      console.error(err);
+      // console.error(err);
       next(err);
     });
 });
@@ -53,7 +63,7 @@ router.put('/:id/periods', (req, res, next) => {
       }
     })
     .catch(err => {
-      console.error(err);
+      // console.error(err);
       next(err);
     });
 });
@@ -70,7 +80,7 @@ router.delete('/:id/periods/:periodId', (req, res, next) => {
       }
     })
     .catch(err => {
-      console.error(err);
+      // console.error(err);
       next(err);
     });
 });
@@ -87,7 +97,7 @@ router.delete('/:id', (req, res, next) => {
       res.status(204).end();
     })
     .catch(err => {
-      console.error(err);
+      // console.error(err);
       next(err);
     });
 });
