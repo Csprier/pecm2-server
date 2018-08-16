@@ -2,6 +2,7 @@
 
 This is a tool teachers can use on their mobile devices, or desktops, to help organize daily class scheduling. 
 
+Create an account! Login to that account! It is protected with JWT authetnication, aswell as bcrypt hashing and salting, and passport!
 
 ## Create an account, or login! If you create an account, you will be automatically logged in on submission!
 <img width="611" alt="screen shot 2018-08-08 at 5 25 29 pm" src="https://user-images.githubusercontent.com/26131912/43865395-7e44f3d4-9b30-11e8-8bb3-e36088a5ef3a.png">
@@ -16,17 +17,30 @@ This is a tool teachers can use on their mobile devices, or desktops, to help or
 
 <img width="45" alt="screen shot 2018-08-08 at 5 32 27 pm" src="https://user-images.githubusercontent.com/26131912/43865616-158d3d96-9b31-11e8-9c0b-278efb768394.png">
 
-## Tech!
-- bcryptjs
-- cors
-- dotenv
-- express
-- jsonwebtoken
-- mongoose
-- morgan
+### This app uses:
+- Express
+- Node
+- MongoDB
+- Mongoose
+- mLab
+
+### Authentication:
 - passport
 - passport-jwt
 - passport-local
+- morgan
+- jsonwebtoken(JWT)
+- bcryptjs
+- cors
+- dotenv
+
+### Testing:
+- mocha
+- chai
+- chai-http
+- cross-env
+- nyc
+
 
 # API
 
@@ -55,3 +69,6 @@ This is a tool teachers can use on their mobile devices, or desktops, to help or
 - POST /periods
 - PUT /periods/:id
 - DELETE /periods/:id
+
+Deployed server on Heroku!
+https://pecm.herokuapp.com (/api/users, /api/students, /api/periods)
